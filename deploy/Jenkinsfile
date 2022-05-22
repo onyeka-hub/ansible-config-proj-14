@@ -9,8 +9,15 @@ pipeline {
         }
       }
     }
+    
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "Testing Stage"'
+        }
+      }
     }
-
+    
   // environment {
   //     ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
   //   }
@@ -48,5 +55,5 @@ pipeline {
   //         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
   //       }
   //     }
-  // }
+   }
 }
