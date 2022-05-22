@@ -1,9 +1,9 @@
 ---
-- host: db
+- hosts: db
 - name: import db files
   import_playbook: ../static-assignments/mysql.yml
 
-- host: nginx
+- hosts: nginx
 - name: nginx assignment
   import_playbook: ../static-assignments/nginx
  
