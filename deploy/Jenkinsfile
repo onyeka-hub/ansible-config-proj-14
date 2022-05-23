@@ -1,15 +1,11 @@
 pipeline {
-    agent any
+  agent any
 
   environment {
       ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
-  // parameters {
-  //     string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-  //   }
-
-     stages{
+  stages {
       stage("Initial cleanup") {
           steps {
             dir("${WORKSPACE}") {
@@ -18,7 +14,7 @@ pipeline {
           }
         }
 
-      stage('Checkout SCM') {
+       stage('Checkout SCM') {
          steps{
             git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/onyeka-hub/ansible-config-proj-14.git'
          }
@@ -31,16 +27,17 @@ pipeline {
         }
      }
 
-      // stage('Run Ansible playbook') {
-      //   steps {
-      //      ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml'
-      //    }
-      // }
+      stage('Run Ansible playbook') {
+        steps {
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'
+         }
+      }
 
       stage('Clean Workspace after build'){
         steps{
           cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
         }
       }
-  }
+    }
+
 }
