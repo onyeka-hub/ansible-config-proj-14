@@ -1,0 +1,3 @@
+[artifactory]
+
+172.31.5.216 ansible_ssh_user='ec2-user'
