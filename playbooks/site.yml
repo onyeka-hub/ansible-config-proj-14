@@ -11,6 +11,7 @@
 # - name: artifactory assignment
 #   import_playbook: ../static-assignments/artifactory.yml
 
+
 - hosts: todo
 - name: Deploy the todo application
   import_playbook: ../static-assignments/deployment.yml
